@@ -1,0 +1,9 @@
+<div class = "heading">
+  <% unless alert.present? %>
+  <h3 class="notice"><%= notice %></h3>
+  <% end %>
+  <h3 class="alert"><%= alert %></h3>
+  <p><%= link_to "トラックナンバー登録", orders_search_path, class: "button-red" %></p>
+  <p><%= link_to "ログイン画面へ戻る", root_path, class: "button-blue" %></p>
+  <p>Copy Right Toshio 2020</p>
+</div>

@@ -1,0 +1,27 @@
+<%= render 'layouts/header'%>
+<div class = "authority-main">
+  <div class = "position__user">
+    <div class = "users">
+    <h2>通知登録</h2>
+  <%= form_for @notice, :url => notices_path do |f| %>
+    <p>告知内容を記載してください</p>
+    <%= f.text_field :text%>
+    <p><%= f.submit "確定", class: "small-btn" , data: { confirm: '本当に良いですか?' }%></p>
+    <% end %>
+    </div>
+  </div>
+
+
+  <div class = "position__slot">
+    <div class = "slot_set">
+      <h2>通知表示</h2>
+      <% @notices.each do |notice|%>
+      <li><%= notice.created_at.strftime("%Y年%m月%d日") %>
+      <%= notice.text %>
+      <%= link_to '削除', notice_path(notice.id), method: :delete, data: { confirm: '本当に削除して良いですか?' } %></li>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+  <%= render 'layouts/footer/absolute'%>

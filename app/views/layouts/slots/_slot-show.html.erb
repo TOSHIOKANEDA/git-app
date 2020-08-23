@@ -1,0 +1,23 @@
+          <li><p>日付
+          <%= slot.date.strftime("%m月%d日")%></p>
+          <p>時間
+          <%= slot.begin_time%> ~ 
+          <%= slot.end_time%></p>
+          <p>MAX本数
+          <%= slot.max_num%></p>
+          <p>この枠の現本数
+          <% orders = Order.where(slot_id: slot.id)%>
+          <%= orders.count%></p>
+          <p><%= slot.slot_purpose %></p>
+          <p><%= slot.slot_size %></p>
+          <p>
+          <%= "一般使用者（AMのみ）" if slot.vip == 1 %></p>
+          <%= "VIP（WHL営業利用）" if slot.vip == 2 %>
+          <%= "ラウンド用（15:30まで）" if slot.vip == 3 %>
+          <p>
+          <%= "ON（表示させる）" if slot.slot_status == 1 %></p>
+          <%= "OFF（表示させない）" if slot.slot_status == 2 %>
+          <p><%= link_to '更新', edit_slot_path(slot.id), method: :get %>
+          <%= link_to '削除', slot_path(slot.id), method: :delete, data: { confirm: '本当にキャンセルして良いですか?' } %>
+          <%= link_to 'リスト抽出', slot_path(slot.id), method: :get %></p>
+          </li>        

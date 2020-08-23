@@ -1,0 +1,23 @@
+<%= render "layouts/trucks/truck_header"%>
+<div class="done-main">
+  <div class = "done-caution">
+  <h3>この画面をスクリーンショットするか、プリントアウトして守衛さんへ見せてください。</h3>
+  <p><span>注意（１）</span>5号前ヤード前専用レーンに入る際、５号前反対車線からUターンせず、品川方面から３、４号前の通行レーンを抜けて入るようにしてください。</p>
+  <p><span>注意（２）</span>プリントアウトする場合は、白黒でもOKなんで、"複写厳禁"の文字が表示されるように印刷してください。<%= link_to "印刷方法はここをクリックしてください", asset_path("how_to_print.pdf") %>）</p>
+  </div>
+  <h2>日付：
+  <%= @order.purpose == 3 && @order.user.authority == 3 ? 
+  Date.today.strftime("%Y年%m月%d日")+"(搬入日当日にこの画面を抽出してください)"
+  : @order.date[0,4]+"年"+@order.date[4]+@order.date[5]+"月"+@order.date[6,7]+"日" %></h2>
+  <h2>コンテナナンバー：<%= @order.cntr_number %></h2>
+  <h2>種別：
+  <%= "実入り搬出" if @order.purpose == 1 %>
+  <%= "空バンPICK" if @order.purpose == 2 %>
+  <%= "実入り搬入" if @order.purpose == 3 %>
+  </h2>
+  <h2>時間帯：
+  <%= @order.purpose == 3 && @order.user.authority == 3 ? "09:00から15:30までの間に入場してください" : (@order.slot.begin_time + "から" + @order.slot.end_time) %>
+  </h2>
+  <h2>トラック番号：<%= @truck.kanji%>　<%= @truck.up_num%>　<%= @truck.hiragana%>　<%= @truck.btm_left_num%> - <%= @truck.btm_right_num%></h2>
+  <h1>※時間内であってもタイミングにより、すぐ入場できない場合があることを理解し、必ず守衛の指示に従います※</h1>
+</div>

@@ -1,0 +1,25 @@
+<%= render "layouts/header"%>
+	<%if current_user.authority == 1 %>
+	<div class = "slot_mother">
+		<div class = "slot_child-upper">
+			<p>日付：
+			<strong><%= @slot.date.strftime("%m月%d日") %></strong></p>
+			<p>現在の開始時刻：
+			<strong><%= @slot.begin_time %></strong></p>
+			<p>現在の終了時刻：
+			<strong><%= @slot.end_time %></strong></p>
+			<p>現在の上限台数：
+			<strong><%= @slot.max_num %>台</strong></p>
+		</div>
+		<div class = "slot_child-down">
+    <%= form_with url: slot_path(params[:id]), method: :patch, local: true do |f| %>
+		<p><%= f.label "上限台数"%></p>
+		<span><%= f.number_field :max_num, min: 1, max: 999, value: @slot.max_num, required: true %><span>
+		<p><%= f.label "表示のON/OFF"%></p>
+		<span><%= f.select :slot_status,[["ON（表示させる）", 1],["OFF（表示させない）", 2]], required: true %><span>
+    <p><%= f.submit "設定する", class: "slot-button" %></p>
+    <% end %>
+		</div>
+	</div>
+  <% end %>
+<%= render "layouts/footer/absolute"%>

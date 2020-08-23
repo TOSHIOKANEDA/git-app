@@ -1,0 +1,17 @@
+<%= render "layouts/trucks/truck_header"%>
+<div class = "right-big-wrapper">
+  <% if current_user %>
+    <% @my_trucks.each do |t|%>
+    <p>
+      <%= t.my_truck_name%>　<%= t.my_kanji%>　<%= t.my_up_num%>　<%= t.my_hiragana%>　<%= t.my_btm_left_num%> - <%= t.my_btm_right_num%>
+      <span><%= link_to "選択", my_truck_copy_path(@order.id, t.id), method: "post", class:"slot-button" %></span></p>
+    </p>
+    <% end %>
+  <% end %>
+</div>
+
+<div class ="left-big-wrapper">
+  <%= form_for @truck, url: trucks_path(id: @order.id) do |f| %>
+    <%= render partial: "layouts/trucks/register_truck", locals: { f: f }%>
+  <% end %>
+</div>

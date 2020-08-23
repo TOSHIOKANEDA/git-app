@@ -1,0 +1,81 @@
+  <div class = "main_content">
+      <div class ="big_content">
+        <div class ="content_left">
+          <%= form_for(@order, url: { action: :confirm }) do |f| %>
+          <% vip_array_begin_time = (Slot.where(slot_status: 1).where(full_status: 1).where(slot_size: 1).where(slot_purpose: 1).where(vip: 2)).order(date: "ASC", begin_time: "ASC")
+          .map{|o| [[o.date.strftime("%Y年%m月%d日")+"の", o.begin_time+"から", o.end_time+"まで"].join(""), o.id]}%>
+          <% dr_array_begin_time = Slot.where(slot_status: 1).where(full_status: 1).where(slot_size: 1).where(slot_purpose: 1).where(vip: 3).order(date: "ASC", begin_time: "ASC")
+          .map{|o| [[o.date.strftime("%Y年%m月%d日")+"の", o.begin_time+"から", o.end_time+"まで"].join(""), o.id]} %>
+          <% array_begin_time = Slot.where(slot_status: 1).where(full_status: 1).where(slot_size: 1).where(slot_purpose: 1).where(vip: 1).order(date: "ASC", begin_time: "ASC")
+          .map{|o| [[o.date.strftime("%Y年%m月%d日")+"の", o.begin_time+"から", o.end_time+"まで"].join(""), o.id]} %>
+          <div class = "left_top">
+            <ul class="cp_stepflow07">
+              <li class="active"><span class="bubble"></span><span>新規予約登録</span></li>
+              <li class="bubble"><span class="bubble"></span><span>予約内容の確認</span></li>
+              <li class="bubble"><span class="bubble"></span><span>予約完了</span></li>
+            </ul>
+            <h2>新規予約登録</h2>
+          </div>
+          <div class = "left_text-field">
+            <span>必須</span>
+            <p>コンテナ番号</p>
+            <%= f.text_field :cntr_number ,:required => true, placeholder: "例）WHLU1234567" %>
+            <h5>❇︎半角大文字英数字にて入力してください！</h5>
+          </div>
+          <div class = "left_text-field">
+            <p>貴方のお名前</p>
+            <%= f.text_field :ordered_name ,:required => false, placeholder: "例）山田太郎" %>
+            <h5>❇︎貴方のお名前が<%= current_user.driver%>さんではない場合のみ、あなたのお名前を記載してください</h5>
+          </div>
+          <div class = "left_text-field">
+            <p>貴方のご連絡先(半角数字でハイフンなし)</p>
+            <%= f.text_field :ordered_tel ,:required => false, placeholder: "例）0312345678" %>
+            <h5>❇︎貴方のお電話番号が<%= current_user.phone%>ではない場合のみ、あなたのご連絡先を記載してください</h5>
+          </div>
+          <div class = "left_text-field">
+            <p>貴方のEmailアドレス</p>
+            <%= f.email_field :ordered_email ,:required => false, placeholder: "例）email@email.com" %>
+            <h5>❇︎貴方のお名前が<%= current_user.email%>ではない場合のみ、あなたのEmailアドレスを記載してください</h5>
+          </div>
+          <div class = "left_text-field">
+            <span>必須</span>
+            <% if current_user.authority == 2 %>
+            <p>予約時間帯</p>
+            <%= f.select :slot_id, vip_array_begin_time, :required => true %>
+            <% elsif current_user.authority == 3 %>
+            <p>予約時間帯</p>
+            <%= f.select :slot_id, dr_array_begin_time, :required => true %>
+            <% else %>
+            <p>予約時間帯</p>
+            <%= f.select :slot_id, array_begin_time, :required => true %>
+            <% end %>
+            <h5>❇︎日付間違いにご注意ください！</h5>
+          </div>
+          <div class = "left_text-field">
+            <span>必須</span>
+            <p>予約種別</p>
+            <% if current_user.authority == 3 %>
+            <%= f.select :purpose, [["実入り搬出", 1],["実入り搬入", 3]], { :prompt => '選択してください' } ,:required => true %>
+            <% else %>
+            <%= f.select :purpose, [["実入り搬出", 1]], { :prompt => '選択してください' } ,:required => true %>
+            <h5>❇︎現状実入り搬出のみです</h5>
+            <% end %>
+          </div>
+          <div class = "left_text-field">
+            <span>必須</span>
+            <p>この予約の車番登録は誰が行う予定ですか？（確定じゃなくてOKですし、変更しても連絡不要です。）</p>
+            <%= f.select :ps_card,
+                  [["配車担当者さん", 1],
+                  ["ドライバーさん", 2],
+                  ["配車担当者さんの同僚", 3]], 
+                {:prompt => "選択してください"} ,:required => true %>
+          </div>
+          <div class = "left_text-field__button">
+            <%= f.submit '確認画面へ', :class=>"button-blue"%>
+          </div>
+        <% end %>
+
+        </div>
+      </div>
+  </div>
+  <%= render 'layouts/footer/normal'%>

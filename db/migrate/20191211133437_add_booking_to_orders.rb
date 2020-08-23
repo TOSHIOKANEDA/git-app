@@ -1,0 +1,6 @@
+class AddBookingToOrders < ActiveRecord::Migration[5.2]
+  def change
+    add_column :orders, :booking, :string
+    add_column :orders, :ps_card, :string
+  end
+end

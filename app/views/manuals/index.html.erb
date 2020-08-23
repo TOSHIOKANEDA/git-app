@@ -1,0 +1,6 @@
+<% if @manuals.present?%>
+  <% @manuals.each do |manual|%>
+  <%= image_tag manual.image.url %>
+  <% end %>
+<% end %>
+

@@ -1,0 +1,275 @@
+@mixin btn {
+  border-radius: 5px;
+  text-align: center;
+  height: 30px;
+  margin: 10 auto;
+  width: 150px;
+  cursor: pointer;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+}
+
+@mixin required {
+  margin-top: -4px;
+  display: block;
+  width: 40px;
+  height: 24px;
+  font-size: 13px;
+  text-align: center;
+  line-height: 24px;
+  color: #fff;
+  border: 1px solid #e30052;
+  border-radius: 2px;
+  background-color: #e30052;
+}
+
+@mixin done {
+  height: 100%;
+  background-size:cover;
+  background-size: 15.5% auto;
+}
+
+.cp_stepflow07 {
+	font-size: 80%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	margin: 0 0 1em;
+	padding: 0;
+}
+.cp_stepflow07 > li {
+	position: relative;
+	display: block;
+	width: auto;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+	text-overflow: ellipsis;
+	color: #b0bec5;
+	 -ms-flex: 1;
+	-moz-flex: 1;
+	-webkit-box-flex: 1;
+	     flex: 1;
+}
+.cp_stepflow07 > li .bubble::after,
+.cp_stepflow07 > li .bubble::before {
+	position: absolute;
+	top: 0px;
+	right: 50%;
+	left: 50%;
+	display: block;
+	width: 90%;
+	height: 8px;
+	content: '';
+	transform: translateX(-50%);
+	background-color: #b0bec5;
+}
+.cp_stepflow07 > li .bubble + span {
+	display: block;
+	margin-top: 1em;
+}
+.cp_stepflow07 > li.completed,
+.cp_stepflow07 > li.completed .bubble {
+	color: #00acc1;
+}
+.cp_stepflow07 > li.completed .bubble,
+.cp_stepflow07 > li.completed .bubble::after,
+.cp_stepflow07 > li.completed .bubble::before {
+	background-color: #4dd0e1;
+}
+.cp_stepflow07 > li.active,
+.cp_stepflow07 > li.active .bubble {
+	font-weight: bold;
+	color: #f57c00;
+}
+.cp_stepflow07 > li.active .bubble,
+.cp_stepflow07 > li.active .bubble::after,
+.cp_stepflow07 > li.active .bubble::before {
+	background-color: #fb8c00;
+}
+
+.main_authority {
+  text-align: left;
+  min-height: 90%;
+  min-width: 90%;
+  margin: 30px;
+  p {
+    overflow: auto;
+    margin: 10px 0 0 10px;
+    padding: 20px;
+  }
+  span {
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+}
+
+
+
+.main_content {
+  width: 990px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 50px;
+  .main_content-title {
+    margin-top: 100px;
+    font-size: 30px;
+    line-height: 1.35;
+    font-weight: 300;
+  }
+  .main_content-message {
+    margin-top: 50px;
+    position: relative;
+  }
+  p {
+    margin-top: 20px;
+    text-align: left;
+  }
+}
+.edit_field {
+  margin: 80px 20px;
+  font-weight: bold;
+  p {
+    margin-top: 10px;
+  }
+  span {
+    color: #e30052;
+  }
+}
+
+.done-main {
+  @include done;
+  background: image-url('no-copy.png');
+  &__no-photo {
+    p {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  }
+  h2 {
+    margin-top: 20px;
+  }
+  p {
+    margin-top: 20px;
+  }
+}
+
+.done-main {
+  @include done;
+  background: image-url('no-copy.png');
+  p {
+    margin-top: 20px;
+  }
+}
+
+.big_content {
+  margin: 0 auto;
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 120px;
+  box-sizing: border-box;
+  .content_left {
+    width: 1000px;
+    float: left;
+    margin-left: 100px;
+    margin-bottom: 100px;
+    padding: 0px 0px 0px 0px;
+    text-align: left;
+    h3, h2 {
+      margin-top: 20px;
+    }
+    span {
+      color: red;
+    }
+    p{
+      margin-bottom: 10px;
+    }
+  }
+  .left_top {
+    padding-top: 50px;
+    padding-bottom: 100px;
+    .done-main {
+      @include done;
+      h2 {
+        margin-top: 20px;
+      }
+      p {
+        margin-top: 20px;
+      }
+    }
+    h2 {
+      margin-top: 150px;
+    }
+  }
+  .left_text-field {
+    text-align: left;
+    margin-top: 30px;
+    padding-left: 20px;
+    border-bottom : solid 1px #b4d8eb;
+    font-size: 25px;
+    p {
+      margin-bottom: 20px;
+    }
+    h5 {
+      margin-bottom: 10px;
+    }
+    span {
+      @include required;
+      float: left;
+    }
+    #order_fu {
+     width: 50px;
+    }
+
+    #order_pki {
+      @extend #order_fu;
+    }
+
+    #order_t_range {
+      width: 20px;
+      height: 20px;
+      margin: 0 10px 0 40px;
+    }
+    &__button {
+      padding-top: 40px;
+      clear: both;
+      margin-bottom: 10px;
+      .button-red {
+        @include btn;
+        background-color: red;
+        color: white;
+      }
+      input {
+        @include btn;
+      }
+    }
+  }
+}
+
+.truck_search{
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  text-align: left;
+  p {
+    margin: 10px;
+  }
+  .truck_field {
+    padding: 20px;
+  
+    p {
+      margin: 10px;
+      span {
+        @include required;
+        float: left;
+      }
+    }
+  }
+  .truck_field_button {
+    padding: 20px;
+    border-bottom : solid 3px #b4d8eb;
+  }
+
+}

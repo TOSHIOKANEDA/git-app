@@ -1,0 +1,46 @@
+<div class = "contents">
+  <h2>アカウント登録</h2>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+
+  <%= form_for(resource, as: resource_name, html: { class: "new_user-red" }, url: registration_path(resource_name)) do |f| %>
+
+    <div class="login_field">
+      <%= f.label "担当者名" %><br />
+      <%= f.text_field :driver, autofocus: true, placeholder: "例）萬海太郎", required: true  %>
+    </div>
+    
+    <div class="login_field">
+      <%= f.label "会社名" %><br />
+      <%= f.text_field :company, autofocus: true, placeholder: "例）株式会社あいうえお", required: true   %>
+    </div>
+
+    <div class="login_field">
+      <%= f.label "連絡先電話番号（半角英数字でハイフンなし）" %><br />
+      <%= f.text_field :phone , autofocus: true, placeholder: "例）0312345678", required: true %>
+    </div>
+    
+    <div class="login_field">
+      <%= f.label "メールアドレス" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "例）abc@123.co.jp", required: true  %>
+    </div>
+
+    <div class="login_field">
+      <%= f.label "パスワード" %>
+      <% if @minimum_password_length %>
+      <em>(最低<%= @minimum_password_length %> 桁の英数字)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", required: true %>
+    </div>
+
+    <div class="login_field">
+      <%= f.label "パスワードの再入力（↑と同じパスワードを再度入力してください）"  %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true  %>
+    </div>
+
+    <div class="login_field">
+      <%= f.submit "登録", :class => "button-red" %>
+    </div>
+  <% end %>
+
+</div>

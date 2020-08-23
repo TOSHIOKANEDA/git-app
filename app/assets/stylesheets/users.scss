@@ -1,0 +1,153 @@
+@mixin flame {
+  padding: 40px 30px 45px 30px;
+  box-sizing: border-box;
+  width: 482px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin btn {
+  border-radius: 5px;
+  text-align: center;
+  margin: 10 auto;
+  width: 150px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.button-blue {
+  @include btn;
+  background-color: blue;
+  color: white;
+  padding: 15px;
+}
+.button-red {
+  @include btn;
+  background-color: red;
+  color: white;
+  padding: 15px;
+}
+
+.contents {
+  padding: 0;
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  min-height: 600px;
+  margin-bottom: 100px;
+  h3 {
+    font-weight: bold;
+    color: red;
+    display: inline-block;
+  }
+  h2 {
+      color: #18469d;
+      font-size: 30px;
+      font-weight: normal;
+      text-align: center;
+      background-repeat: no-repeat;
+      background-position: bottom;
+      padding-bottom: 10px;
+      margin-bottom: 35px;
+  }
+  p {
+    margin-bottom: 25px;
+    font-size: 16px;
+  }
+  a {
+    font-size: 16px;
+    text-decoration: none;
+  }
+  .new_user-green {
+    @include flame;
+    background-color: #e6fcd4;
+    border: 2px solid #93d260;
+    margin-bottom: 25px;
+    p {
+      margin-bottom: 25px;
+      font-size: 16px;
+      text-align: left;
+      font-size: 20px; 
+    }
+    .login_field {
+      margin-bottom: 20px;
+    }
+    .button-green {
+      @include btn;
+      background-color: green;
+      color: white;
+    }
+    .button-green_link {
+      background-color: green;
+      color: white;
+      height: 30px;
+      width:150px;
+      padding: 10px;
+      border-radius: 5px;      
+    }
+  }
+  .new_user-red {
+    @include flame;
+    background-color: #fcddd4;
+    border: 2px solid #df8888;
+    margin-bottom: 25px;
+    p {
+      margin-bottom: 25px;
+      font-size: 16px;
+      text-align: left;
+      font-size: 20px; 
+    }
+    .button-red {
+      @include btn;
+      background-color: red;
+      color: white;
+    }
+    .login_field {
+      margin-bottom: 20px;
+    }
+  }
+
+  .notice-blue {
+    @include flame;
+    margin-bottom: 20px;
+    background-color: #c0cef5;
+    border: 2px solid #2c4ad3;
+    max-height: 350px;
+    overflow: scroll;
+    list-style: none; 
+    p {
+      margin-bottom: 25px;
+      font-size: 16px;
+      text-align: left;
+      font-size: 20px; 
+    }
+    li {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+  }
+
+}
+
+.manual {
+  margin: 20px;
+  display: flex;
+  .image {
+    width: 95%;
+    margin-bottom: 10px;
+  }
+  .manual_text {
+    margin: 20px;
+    width: 60%;
+  }
+  .manual_movie {
+    .manual_movie-head {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    margin: 20px;
+    width: 30%;
+  }
+}

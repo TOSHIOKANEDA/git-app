@@ -1,0 +1,47 @@
+<%= render 'layouts/header'%>
+<div class = "slot_mother">
+  <div class = "slot_child-upper">
+    <% if @my_trucks.present?%>
+    <h2>保存してあるトラック一覧</h2>
+      <% n = 0%>
+      <% @my_trucks.each do |t|%>
+      <% n = n+1%>
+      <p>No.<%= n%>（<%= t.my_truck_name%>）:　<%= t.my_kanji%>　<%= t.my_up_num%>　<%= t.my_hiragana%>　<%= t.my_btm_left_num%> - <%= t.my_btm_right_num%>
+      <span><%= link_to "登録削除", destroy_my_trucks_path(id: t.id), method: "delete", class:"slot-button" %></span></p>
+      <%end%>
+    <% else %>
+    <p>保存してあるトラックはまだありません</p>
+    <%end%>
+  </div>
+</div>
+
+<h2>保存したいトラックの登録</h2>
+<div class ="left-big-wrapper">
+  <div class ="wrapper-left">
+    <p>何回も使うトラックを保存できます。下記の赤枠内、
+    <p>１、トラックを簡単に識別できるよう、御社独自の車体管理番号や名前を自由に書いてください。空欄でもOKです。</p>
+    <p>２、トラックの番号は写真を参照に登録をしてください<p>
+  </div>
+  <div class = "middle-down-box">    
+    <%= form_with url:  create_my_trucks_path, method: :post, local: true do |f| %>
+      <%= f.label "１、トラックを識別する用で空欄でもOK"%><br>
+      <p><%= f.text_field :my_truck_name, placeholder: "例：運転手田中さん" %></p>
+      <%= f.label "２、トラック番号の登録"%>
+      <li>
+      <%= f.select :my_kanji, @kanji, {prompt: "地域名"}, {required: true, id: "truck_kanji"} %>
+      <%= f.select :my_up_num, "10".."199", {prompt: "分類番号"}, {required: true, id: "truck_up_num"} %></li>
+      <li><%= f.select :my_hiragana, @hiragana, {prompt: "平仮名"}, {required: true, id: "truck_hiragana"} %>
+      <%= f.select :my_btm_left_num, @left_nums, {prompt: "一連左側番号"}, {required: true, id: "truck_btm_left_num"} %>
+      ー
+      <%= f.select :my_btm_right_num, @right_nums, {prompt: "一連右側番号"}, {required: true, id: "truck_btm_right_num"}%></li>
+      <p><%= f.submit "登録する", class: "button-blue" , data: { confirm: '本当に良いですか?' }%></p>
+  </div>
+
+
+  <div class="middle-box">
+  <%= image_tag 'plate.jpg' %>
+  </div>
+  <% end %>
+
+</div>
+<%= render "layouts/footer/normal"%>

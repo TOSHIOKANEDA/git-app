@@ -1,0 +1,9 @@
+<div class ="main_authority">
+  <p><%= link_to "登録ユーザー管理", "/orders/authority", class: "button-blue" %><span>時間帯枠の設定とユーザー登録の管理をするページです</span></p>
+  <p><%= link_to "TML用データダウンロード", orders_authority_path(format: :csv), class: "button-blue"%><span>TMLに読み込ませるCSVをダウンロードします</span></p>
+  <p><%= link_to "USER情報データダウンロード", users_download_path(format: :csv), class: "button-blue"%><span>登録してある全ユーザー情報をダウンロードします</span></p>
+  <p><%= link_to "広告通知編集", notices_path, class: "button-blue" %><span>ログイン時のお知らせする内容を登録するページです</span></p>
+  <p><%= link_to "トラック番号削除", trucks_path, class: "button-blue" %><span>トラックを間違えて登録した！とか連絡があった時に、トラック登録情報を削除するページです。</span></p>
+</div>
+
+<%= render 'layouts/footer/normal'%>

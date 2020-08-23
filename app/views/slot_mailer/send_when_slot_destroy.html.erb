@@ -1,0 +1,36 @@
+<h3>Here are reservation list.</h3>
+<p>===============================</p>
+<% if @orders.present? %>
+In total, <%= @orders.count%> reservations.<br>
+車番登録アンケート: 1=配車担当者さん、2=トラックドライバーさん、3=配車担当者さんの同僚
+<table>
+  <th>CNTR_NO</th>
+  <th>RESERVE_DATE</th>
+  <th>RESERVE_BGN_TIME</th>
+  <th>RESERVE_END_TIME</th>
+  <th>TRUCK</th>
+  <th>COMPANY</th>
+  <th>CONTACTOR</th>
+  <th>TEL</th>
+  <th>AI-KOTOBA</th>
+  <th>CLASSIFICATION（1以外は輸出搬入なんで削除）</th>
+  <th>車番登録者アンケート</th>
+  <tr>
+  <% @orders.each do |order|%>
+  <td><%= order.cntr_number %></td>
+  <td><%= order.date %></td>
+  <td><%= order.ordered_begin_time%></td>
+  <td><%= order.ordered_end_time%></td>
+  <td><%= order.truck_number%></td>
+  <td><%= order.ordered_company%></td>
+  <td><%= order.ordered_name%></td>
+  <td><%= order.ordered_tel%></td>
+  <td><%= order.pass_code%></td>
+  <td><%= order.purpose%></td>
+  <td><%= order.ps_card%></td>
+  </tr>
+  <% end %>
+</table>
+<% else %>
+  No reservation as of <%= Time.now %>.
+<% end %>

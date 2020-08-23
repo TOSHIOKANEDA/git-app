@@ -1,0 +1,98 @@
+<%= render 'layouts/header'%>
+<div class = "authority-main">
+
+  <div class = "slot__set">
+    <h1>新規枠設定</h1>
+    <%= form_with url: slots_path, method: :post, local: true do |f| %>
+      <%= render partial: "layouts/slots/slot-set_form", locals: { f: f }%>
+      <div class = slot_selection>
+      <%= f.submit "設定する", class: "small-btn" , data: { confirm: '本当に良いですか?' }%>
+      </div>
+    <% end %>
+  </div>
+
+  <div class = "position__slot">
+    <h1>時間帯設定</h1>
+    <% @slots.order(date: "ASC", begin_time: "ASC").each do |slot| %>
+      <% if slot.slot_status == 1 %>
+        <div class = "slot_large_2" >
+          <%= render partial: "layouts/slots/slot-show", locals: { slot: slot }%>
+        </div>
+      <% else %>
+        <div class = "slot_large" >
+          <%= render partial: "layouts/slots/slot-show", locals: { slot: slot }%>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+  <div class = "position__user">
+    <div class = "users">
+      <table>
+        <h2>参加者</h2>
+        <%= paginate @test_members %>
+        <span>（予約者数：<%= @test_members.count %>）</span>
+        <th>電話番号</th>
+        <th>会社名</th>
+        <th>担当者名</th>
+        <th></th>
+        <% @test_members.each do |r| %>
+          <%= render partial: "layouts/tables/table-authority", locals: { r: r }%>
+        <% end %>
+      </table>
+      <table>
+        <h2>新規登録者</h2>
+        <%= paginate @new_members %>
+        <span>（予約者数：<%= @new_members.count %>）</span>
+        <th>電話番号</th>
+        <th>会社名</th>
+        <th>担当者名</th>
+        <th></th>
+        <% @new_members.each do |r| %>
+          <%= render partial: "layouts/tables/table-authority", locals: { r: r }%>
+        <% end %>
+      </table>
+      <table>
+        <h2>VIPリスト</h2>
+        <%= paginate @special_members %>
+        <span>（予約者数：<%= @special_members.count %>）</span>
+        <th>電話番号</th>
+        <th>会社名</th>
+        <th>担当者名</th>
+        <th></th>
+        <% @special_members.each do |r| %>
+          <%= render partial: "layouts/tables/table-authority", locals: { r: r }%>
+        <% end %>
+      </table>
+
+      <table>
+        <h2>ラウンドリスト</h2>
+        <%= paginate @dr_members %>
+        <span>（予約者数：<%= @dr_members.count %>）</span>
+        <th>電話番号</th>
+        <th>会社名</th>
+        <th>担当者名</th>
+        <th></th>
+        <% @dr_members.each do |r| %>
+          <%= render partial: "layouts/tables/table-authority", locals: { r: r }%>
+        <% end %>
+      </table>
+
+      <table>
+        <h2>ブラックリスト</h2>
+        <%= paginate @black_members %>
+        <span>（予約者数：<%= @black_members.count %>）</span>
+        <th>電話番号</th>
+        <th>会社名</th>
+        <th>担当者名</th>
+        <th></th>
+        <% @black_members.each do |r| %>
+          <%= render partial: "layouts/tables/table-authority", locals: { r: r }%>
+        <% end %>
+      </table>
+    </div>
+  </div>
+
+
+  <%= render 'layouts/footer/normal'%>

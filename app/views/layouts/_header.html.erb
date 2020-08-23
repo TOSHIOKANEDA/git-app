@@ -1,0 +1,30 @@
+<div class = "heading">
+  <h2><%= current_user.company%>さんこんにちは。【大井５号ターミナル】予約搬出システムへようこそ！！</h2>
+  <h3 class="notice"><%= notice %></h3>
+  <h3 class="alert"><%= alert %></h3>
+
+
+
+
+  <p><%= link_to "予約内容選択インデックス", powers_path, class: "button-blue" %></p>
+  <p><%= link_to "ログアウト", destroy_user_session_path, method: "delete", class:"button-blue" %></p>
+  
+
+  <% if current_user.authority == 1%>
+    <% if @actives.present?%>
+      <p><%= link_to "受付停止", orders_switch_path(power_id: 2), class: "button-blue", data: { confirm: '本当に停止しますか?' }%></p>
+      <p><%= link_to "受付再開", orders_switch_path(power_id: 1), class: "button-blue", data: { confirm: '本当に再開しますか?' }%></p>
+    <% else %>
+      <p><%= link_to "受付停止", orders_switch_path(power_id: 2), class: "button-red", data: { confirm: '本当に停止しますか?' }%></p>
+      <p><%= link_to "受付再開", orders_switch_path(power_id: 1), class: "button-red", data: { confirm: '本当に再開しますか?' }%></p>
+    <% end %>
+  <% elsif current_user.authority == 2 %>
+  <p><%= link_to "予約一覧", "/users/#{current_user.id}/show", class: "button-blue" %></p>
+  <p><%= link_to "トラックナンバー登録", orders_search_path, class: "button-red" %></p>
+  <% elsif current_user.authority == 3 || current_user.authority == 4 %>
+  <p><%= link_to "利用者登録内容変更", "/users/#{current_user.id}/edit", class: "button-blue" %></p>
+  <p><%= link_to "予約一覧", "/users/#{current_user.id}/show", class: "button-blue" %></p>
+  <p><%= link_to "トラックナンバー登録", orders_search_path, class: "button-red" %></p>
+  <p><%= link_to "いつも使うトラックの保存と削除", "/my_trucks/#{current_user.id}/index", class: "button-blue" %></p>
+  <% end%>
+</div>

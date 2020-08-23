@@ -1,0 +1,55 @@
+<%= render "layouts/header"%>
+  <div class ="big_content">
+    <div class ="content_left">
+    <div class = "left_top">
+          <ul class="cp_stepflow07">
+            <li class="completed"><span class="bubble"></span><span>新規予約まくり登録</span></li>
+            <li class="active"><span class="bubble"></span><span>予約内容の確認</span></li>
+            <li class="bubble"><span class="bubble"></span><span>予約完了</span></li>
+          </ul>
+          <h2>予約内容の確認</h2>
+        </div>
+        <%= form_for @order, :url => orders_done_path do |f| %>
+        <div class = "left_text-field">
+          <p>日付：<%= f.hidden_field :date %><%= @order.slot.date.strftime("%Y年 %m月 %d日") %></p>
+          <p>コンテナ番号：<%= f.hidden_field :cntr_number %><%= @order.cntr_number %></p>
+          <p>時間帯：<%= f.hidden_field :slot_id %><%= @order.slot.begin_time %>から<%=@order.slot.end_time%></p>
+          <p>配車ご担当者名：<%= f.hidden_field :ordered_name %><%= @order.ordered_name %>
+          </p>
+          <p>配車ご担当者のご連絡先：<%= f.hidden_field :ordered_tel %><%= @order.ordered_tel %></p>
+          <p>配車ご担当者のEmailアドレス：<%= f.hidden_field :ordered_email %><%= @order.ordered_email %></p>
+          <%f.hidden_field :pass_code%><% @order.pass_code %>
+          <p>
+            種別：<%= f.hidden_field :purpose %>
+            <%= "実入り搬出" if @order.purpose == 1 %>
+            <%= "空バンPICK" if @order.purpose == 2 %>
+            <%= "実入り搬入" if @order.purpose == 3 %>
+            </p>
+            <p>この予約の車番登録は誰が行う予定ですか？（確定じゃなくてOKですし、変更しても連絡不要です。）<%= f.hidden_field :ps_card %>
+            <%= "配車担当者さん" if @order.ps_card == 1 %>
+            <%= "ドライバーさん" if @order.ps_card == 2 %>
+            <%= "配車担当者さんの同僚" if @order.ps_card == 3 %>
+          </p>
+        </div>
+        
+          <div class = "left_text-field">
+            <span>必須</span>
+            <%= f.check_box :fu %>コンテナ番号に誤りありませんか？なければCheckいれてください。
+          </div>
+          <div class = "left_text-field">
+            <span>必須</span>
+            <%= f.check_box :pki %>PICK予定日と時間帯に誤りはありませんか？なければCheckいれてください。
+          </div>
+
+      <div class = "left_text-field__button">
+        <%= f.submit '戻る', name: 'back', class: "button-blue" %>
+        <%= f.submit '確定する', class: "button-red"%>
+      </div>
+        <h3>*誤りがある場合には入場できませんのでご注意ください</h3>
+        <h3>*この時点ではまだ予約確定してません。確定するには、チェックを入れて確定ボタンを押してください。</h3>
+    <% end %>
+    </div>
+  </div>
+<%= render "layouts/footer/normal"%>
+
+

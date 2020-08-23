@@ -1,0 +1,45 @@
+<%= render "layouts/header"%>
+<% if current_user.authority == 1%>
+	<div class = "slot_mother">
+      <strong>”<%= @user.company %>”さんの更新</strong>
+			<strong><%= link_to '登録の削除', users_path(@user.id), method: :delete, 
+			data: { confirm: '本当に登録を削除して良いですか?' }, class: "slot-button" %></strong>
+			<%= form_with url: users_path, method: :patch, local: true do |f| %>
+			<strong>利用者権限</strong>
+			<p><%= f.select :authority, [["一般", "4"],["VIP（WHL営業利用）", "2"],["ラウンド", "3"],["利用制限者（ブラックリスト）", "9"]] %></p>
+			<strong>担当者名</strong>
+			<p><%= f.text_field :driver,  value: @user.driver, required: true %></p>
+			<strong>電話番号</strong>
+			<p><%= f.text_field :phone,  value: @user.phone, required: true %></p>
+			<strong>メールアドレス</strong>
+			<p><%= f.text_field :email,  value: @user.email, required: true %></p>
+			<strong>運輸局許可番号</strong>
+			<p><%= f.text_field :certificate,  value: @user.certificate, required: true %></p>
+			<strong><%= f.submit '変更を保存', class: "button-blue", 
+			data: { confirm: "ご登録内容をもう一度確認してください。複数人数で使いまわしている方は、変更内容を社内で周知してください" }%></strong>
+			<% end %>
+	</div>
+<% else %>
+	<div class = "slot_mother">
+		<div class = "slot_child-upper">
+			<%= form_with url: users_path, method: :patch, local: true do |f| %>
+			<strong>ご登録の御社名</strong>
+			<p><%= f.text_field :company,  value: @user.company, required: true%></p>
+			<strong>ご担当者様のお名前</strong>
+			<p><%= f.text_field :driver,  value: @user.driver, required: true%></p>
+			<strong>ご担当者様のお電話番号</strong>
+			<p><%= f.text_field :phone,  value: @user.phone, required: true%></p>
+			<strong>メールアドレス</strong>
+			<p><%= f.email_field :email,  value: @user.email, required: true %></p>
+			<strong><%= f.submit '保存', class: "slot-button", 
+			data: { confirm: "ご登録内容をもう一度確認してください。複数人数で使いまわしている方は、変更内容を社内で周知してください" }%></strong>
+			<% end %>
+		</div>
+	</div>
+<% end %>
+
+<%= render "layouts/footer/absolute"%>
+
+
+
+

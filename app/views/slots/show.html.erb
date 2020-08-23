@@ -1,0 +1,28 @@
+
+<%= render "layouts/header"%>
+<table>
+  <thead>
+    <tr>
+      <th>コンテナ番号</th>
+      <th>担当者名</th>
+      <th>電話番号</th>
+      <th>会社名</th>
+      <th>日時</th>
+      <th>予約時間</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |list| %>
+      <tr>
+        <td><%= list.cntr_number %></td>
+        <td><%= list.ordered_name %></td>
+        <td><%= list.ordered_tel %></td>
+        <td><%= list.user.company %></td>
+        <td><%= list.date %></td>        
+        <td><%= list.slot.begin_time %>から<%= list.slot.end_time %></td>
+        <td><%= link_to "削除",order_path(list.id), method: :delete, data: { confirm: '本当に削除して良いですか?' }, class: "button-red" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= render "layouts/footer/normal"%>

@@ -1,0 +1,11 @@
+<%= render 'layouts/header'%>
+  <div class = "slot__set">
+    <h1>所有するトラック番号の保存</h1>
+    <%= form_with url: slots_path, method: :post, local: true do |f| %>
+      <%= render partial: "layouts/slots/slot-set_form", locals: { f: f }%>
+      <div class = slot_selection>
+      <%= f.submit "設定する", class: "small-btn" , data: { confirm: '本当に良いですか?' }%>
+      </div>
+    <% end %>
+  </div>
+<%= render "layouts/footer/absolute"%>

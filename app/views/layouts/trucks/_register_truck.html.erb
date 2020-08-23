@@ -1,0 +1,19 @@
+
+  <span>ご予約のコンテナ番号：</span><h3><%= @order.cntr_number%></h3>
+  <p>配車担当：<%= @order.ordered_name%>さま</p>
+  <p>電話番号：<%= @order.ordered_tel%></p><br>
+  <p>下記の赤枠内、下記例を参照にトラック番号を登録してください<p>
+  <div class = "middle-down-box">
+      <li class = "right-up">
+      <%= f.select :kanji, @kanji, {prompt: "地域名"}, {required: true} %>
+      <%= f.select :up_num, "10".."199", {prompt: "分類番号"}, {required: true} %></li>
+      <li><%= f.select :hiragana, @hiragana, {prompt: "平仮名"}, {required: true} %>
+      <%= f.select :btm_left_num, @left_nums, {prompt: "一連左側番号"}, {required: true} %>
+      ー
+      <%= f.select :btm_right_num, @right_nums, {prompt: "一連右側番号"}, {required: true}%></li>
+    <p><%= f.submit value: '登録する', class: "button-blue", data: {confirm: "入力間違えなどによる変更は一度までです。トラック番号の内容に間違いないですか？"}%></p>
+  </div>
+  <div class="middle-box">
+    <%= image_tag 'plate.jpg' %>
+  </div>
+

@@ -1,0 +1,10 @@
+<%= render "layouts/header"%>
+  <%if current_user.power_id == 2%>
+    <% if current_user.authority == 2 %>
+      <%= render "layouts/orders/completed-contents"%>
+    <% else %>
+      <%= render 'layouts/intros/updating'%>
+    <% end %>
+  <% else %>
+    <%= render "layouts/orders/completed-contents"%>
+  <% end %>

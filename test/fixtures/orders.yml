@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cntr_number: MyString
+  truck: MyString
+  date: 2019-08-04
+
+two:
+  cntr_number: MyString
+  truck: MyString
+  date: 2019-08-04

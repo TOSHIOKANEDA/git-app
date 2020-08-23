@@ -1,0 +1,46 @@
+<%= render "layouts/trucks/truck_header"%>
+<div class ="truck_search">
+  <%= form_with(url: orders_search_path, local: true, method: :get) do |f| %>
+    <div class = "truck_field">
+      <p>コンテナ番号
+      <span>必須</span>
+      </p>
+      <%= f.text_field :keyword_cntr, placeholder: "例）WHSU0000000", required: true %>
+    </div>
+
+    <div class = "truck_field">
+      <p>予約番号(半角数字及び平仮名の組み合わせ)
+      <span>必須</span>
+      </p>
+      <%= f.text_field :keyword_pass_code, placeholder: "例）あい1えお", required: true %></p>
+    </div>
+  
+  <div class = "truck_field_button">
+    <%= f.submit "検索", class: "button-blue" %>
+  </div>
+  <% end %>
+
+
+ 
+  <% if @order.present? %>
+    <p>コンテナ番号: <%= @order.cntr_number %></p>
+    <p>予約日付: <%= @order.date %></p>
+    <p>予約時間: <%= @order.ordered_begin_time%>〜<%= @order.ordered_end_time%></p>
+    <p>予約会社前: <%= @order.ordered_company %></p>
+    <p>予約者名: <%= @order.ordered_name %>さま</p>
+    <p>予約者電話番号: <%= @order.ordered_tel %></p>
+      <div class = "truck_field">
+      <p><span>注意</span>
+      トラック番号の訂正は１度だけ可能です。
+      </p>
+      </div>
+      <% if @truck.blank?%>
+      <p><%= link_to 'トラック番号新規登録', new_truck_path(id: @order.id), method: :get, class: "button-blue" %></p>
+      <% else %>
+      <p>現在登録されているトラック番号：
+      <%= @truck.kanji%>　<%= @truck.up_num%>　<%= @truck.hiragana%>　<%= @truck.btm_left_num%> - <%= @truck.btm_right_num%></p><br>
+      <p><%= link_to 'トラック番号訂正', trucks_change_path(id: @order.id),method: :get, class: "button-red" %> 
+      <%= link_to 'スクリーンショットを忘れた方', truck_path(id: @truck.id), method: :get, class: "button-blue" %></p>
+      <% end %>
+  <% end %>
+</div>

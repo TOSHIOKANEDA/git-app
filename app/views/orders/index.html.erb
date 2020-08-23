@@ -1,0 +1,14 @@
+<% if user_signed_in? %>
+  <%= render 'layouts/header'%>
+  <% if current_user.authority == 1 %>
+    <%= render 'layouts/intros/authority' %>
+  <% elsif current_user.authority.blank? || current_user.authority == 9 %>
+    <%= render 'layouts/intros/unregistered&black' %>
+  <% elsif @power.update_switch == 2 %>
+    <%= render 'layouts/intros/updating'%>
+  <% else %>
+    <%= render 'layouts/orders/order'%>  
+  <% end %>
+<% end %>
+
+

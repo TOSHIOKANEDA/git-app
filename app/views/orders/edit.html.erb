@@ -1,0 +1,28 @@
+<% if current_user.id == @order.user_id %>
+  <%= render "layouts/header"%>
+    <%= form_for(@order, url: { action: :update }) do |f| %>
+      <% if @order.slot.slot_status == 1 %>
+        <div class = "edit_field">
+          コンテナ番号
+          <p><%= f.text_field :cntr_number ,:required => true%></p>
+
+          <p>
+            <div class = "edit_field">
+            <%= f.submit '変更する', class: "button-red" %>
+            <p><span>＊最大更新可能回数は２回までです！更新ボタンを押す前に内容を確認してください</span></p>
+            <p><span>＊＊時間帯の変更は不可です！一度予約を取消して頂き、再度予約をとり直してください</span></p>
+            <p><span>＊＊＊トラックナンバー登録ずみの方でコンテナ番号を変更した場合は、必ず新しく登録したコンテナナンバーから検索し、トラックナンバー新規登録をしてください</span></p>
+            </div>
+          </p>
+        </div>
+      <% else %>
+        <div class = "edit_field">
+          前日１４時以降はコンテナ番号の変更を受け付けておりません
+        </div>
+      <% end %>
+  <% end %>
+<%= render "layouts/footer/absolute"%>
+<% end %>
+
+
+

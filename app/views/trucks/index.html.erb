@@ -1,0 +1,32 @@
+<%= render "layouts/header"%>
+<table>
+  <thead>
+    <tr>
+      <th>トラック番号</th>
+      <th>コンテナ番号</th>
+      <th>変更可能残数</th>
+      <th>日時</th>
+      <th>予約時間</th>
+      <th>会社名</th>
+      <th>担当者電話番号</th>
+      <th>担当者名</th>
+      <th>削除ボタン</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @trucks.each do |truck| %>
+      <tr>
+        <td><%= "#{truck.kanji}#{truck.up_num}#{truck.hiragana}#{truck.btm_left_num}-#{truck.btm_right_num}" %></td>
+        <td><%= truck.cntr_number %></td>
+        <td><%= truck.allowance %></td>
+        <td><%= truck.ordered_begin_time %>~<%= truck.ordered_end_time %></td>
+        <td><%= truck.date %></td>
+        <td><%= truck.order.ordered_company%></td>
+        <td><%= truck.order.ordered_tel %></td>
+        <td><%= truck.order.ordered_name %></td>
+        <td><%= link_to "削除",truck_path(truck.id), method: :delete, data: { confirm: '本当に削除して良いですか?' }, class: "button-red" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= render "layouts/footer/normal"%>

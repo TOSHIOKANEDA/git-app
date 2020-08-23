@@ -1,0 +1,33 @@
+<%= render "layouts/header" , object: @order_num%>
+  <table>
+    <%= will_paginate @orders %>
+      <th>予約日</th>
+      <th>予約時間</th>
+      <th>予約種別</th>
+      <th>コンテナ番号</th>
+      <th>予約コード</th>
+      <th>予約明細</th>
+      <th>コンテナ番号の更新</th>
+      <th>キャンセル</th>
+      <% @orders.each do |order| %>
+        <% if user_signed_in? && current_user.id == order.user_id %>
+          <tr>
+            <td><%= order.date[0,4]+"年"+order.date[4]+order.date[5]+"月"+order.date[6,7]+"日"%></td>
+            <td><%= order.ordered_begin_time+"から"+order.ordered_end_time%></td>
+            <td>
+            <%= order.purpose == 1 ? "実入り搬出" : "実入り搬入"%>
+            </td>
+            <td><%= order.cntr_number%></td>
+            <td><%= order.pass_code%></td>
+            <td><%= link_to '表示', orders_display_path(id: order.id), method: :get, class: "button-blue"%></td>
+            <td><%= order.allowance > 0 ? (link_to '更新', "/orders/#{order.id}/edit", method: :get, class: "button-blue") : "これ以上更新不可"%></td>
+            <% if order.slot.slot_status == 1 || order.purpose == 3%>
+            <td><%= link_to  "取消", order_path(order.id), method: :delete, data: { confirm: '本当にキャンセルして良いですか?' }, class: "button-red"%></td>
+            <% else %>
+            <td>当日削除はできません</td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+  </table>
+<%= render "layouts/footer/normal"%>

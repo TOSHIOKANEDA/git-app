@@ -1,0 +1,33 @@
+<% @time_selections = 
+["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30",
+"13:00","13:30","14:00","14:30","15:00","15:30"] %>
+
+
+<div class = slot_selection><%= f.label "枠の利用権限"%>
+<span><%= f.select :vip, [["一般使用者(AMのみ)", 1],["VIP（WHL営業利用）", 2],
+["ラウンド業者専用（15:30まで）", 3]],{:prompt => "選択してください"} ,:required => true %></span>
+</div><br>
+
+<div class = slot_selection><%= f.label "開始時間"%>
+<span><%= f.select :begin_time, @time_selections %></span>
+</div><br>
+
+<div class = slot_selection><%= f.label "終了時間"%>
+  <span><%= f.select :end_time, @time_selections %></span>
+</div><br>
+
+<div class = slot_selection><%= f.label "予約内容"%>
+  <span><%= f.select :slot_purpose, options_for_select(Slot.slot_purposes.keys) %></span>
+</div><br>
+
+<div class = slot_selection><%= f.label "予約内容"%>
+  <span><%= f.select :slot_size, options_for_select(Slot.slot_sizes.keys) %></span>
+</div><br>
+
+<div class = slot_selection><%= f.label "上限台数"%>
+  <span><%= f.number_field :max_num, min: 1, max: 999 %></span>
+</div><br>
+
+<div class = slot_selection><%= f.label "日付"%>
+  <span><%= f.date_field :date, min: Date.today, max: Date.today+5, :required => true %></span>
+</div><br>

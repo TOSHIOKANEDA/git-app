@@ -1,0 +1,16 @@
+<%= render 'layouts/header'%>
+
+<div class ="main_authority">
+  <h5><span>20GP</span>コンテナのPICKと空バン返却はこちら</h5>
+  <p><%= link_to "新大井バンプール返却先着登録", "/orders/authority", class: "button-blue" %><span>20フィートの返却です</span></p>
+  <p><%= link_to "新大井バンプール空バンPICK先着登録", orders_authority_path(format: :csv), class: "button-blue"%><span>20フィートの空ピックです</span></p>
+
+  <br><h5><span>40ハイキューブ</span>コンテナのPICKと空バン返却はこちら</h5>
+  <p><%= link_to "新大井バンプール返却先着登録", "/orders/authority", class: "button-blue" %><span>40ハイキューブの返却です</span></p>
+  <p><%= link_to "新大井バンプール空バンPICK先着登録", orders_authority_path(format: :csv), class: "button-blue"%><span>40ハイキューブの空ピックです</span></p>
+
+  <br><h5><span>大井５号ターミナルの予約はこちら</span></h5>
+  <p><%= link_to "大井５号ターミナル実入り搬出予約", root_path, class: "button-blue"%><span>大井５号ターミナルで揚がった全船社とも予約可能です。</span></p>
+</div>
+
+<%= render 'layouts/footer/normal'%>

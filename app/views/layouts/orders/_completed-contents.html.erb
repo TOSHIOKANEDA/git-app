@@ -1,0 +1,47 @@
+    <div class ="big_content">
+      <div class ="content_left">
+        <div class = "left_top">
+            <ul class="cp_stepflow07">
+              <li class="completed"><span class="bubble"></span><span>新規予約まくり登録</span></li>
+              <li class="completed"><span class="bubble"></span><span>予約内容の確認</span></li>
+              <% if @order.errors.any? %>            
+              <li class="active"><span class="bubble"></span><span>エラー（予約確定してません）</span></li>
+              <% else %>
+              <li class="active"><span class="bubble"></span><span>予約完了</span></li>
+              <%end%>
+            </ul>
+        </div>
+          <% if @order.errors.any? %>	
+          <%= render 'layouts/error_messages'%>
+          <% else %>
+            <p>予約は完了しましたが、トラックナンバーの登録が必要です。登録詳細は下記の通りです。</p><br>
+            <p>１、右上のトラックナンバー登録からトラックナンバーを登録してください。</p>
+            <p>２、登録はゲート到着直前でもOKです。</p>
+            <p>３、予約者さん以外でもトラックナンバーの登録は可能です。（ログイン必要ないので、スマホがあれば運転手さんが車中から登録するんでもOKです）</p>
+            <p>４、トラックナンバー登録には、下記<span>”コンテナナンバー”と”予約番号”</span>が必要です。</p>
+            <p>５、右上の予約一覧からでも<span>”コンテナナンバー”と”予約番号”</span>を確認できます。</p>
+            <p>６、ドライバーさんにトラックナンバー登録をお願いする場合には、<span>”コンテナナンバー”と”予約番号”</span>両方をお伝えください。（数字は半角です）</p>
+            <p>７、トラックナンバー登録が完了してから、予約完了画面が抽出されます。この画面だけでは入場できませんので、トラックナンバー登録完了後の画面を守衛さんに見せてください。</p>
+            <h2>日付：
+            <%= @order.purpose == 3 && @order.user.authority == 3 ? 
+            Date.today.strftime("%Y年%m月%d日")+"(搬入日当日にこの画面を抽出してください)"
+            : @order.date[0,4]+"年"+@order.date[4]+@order.date[5]+"月"+@order.date[6,7]+"日" %>
+            </h2>
+            
+            <h2>コンテナナンバー：<%= @order.cntr_number %></h2>
+            
+            <h2>種別：
+            <%= "実入り搬出" if @order.purpose == 1 %>
+            <%= "空バンPICK" if @order.purpose == 2 %>
+            <%= "実入り搬入" if @order.purpose == 3 %>
+            </h2>
+            
+            <h2>時間帯：
+            <%= @order.purpose == 3 && @order.user.authority == 3 ? "09:00から15:30までの間に入場してください" : (@order.slot.begin_time + "から" + @order.slot.end_time) %>
+            </h2>
+            
+            <h2>予約番号：<%= @order.pass_code%></h2>
+          <% end %>
+    </div>
+</div>
+<%= render "layouts/footer/normal"%> 

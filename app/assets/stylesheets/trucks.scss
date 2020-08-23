@@ -1,0 +1,96 @@
+@mixin middle-box {
+  margin-right: 5px;
+  padding: 20px;
+}
+
+@mixin required {
+  margin-top: -4px;
+  display: block;
+  width: 100px;
+  height: 24px;
+  font-size: 13px;
+  text-align: center;
+  line-height: 24px;
+  color: #fff;
+  border: 1px solid #e30052;
+  border-radius: 2px;
+  background-color: #e30052;
+}
+
+.right-big-wrapper {
+  width: 40%;
+  height: 100%;
+  float: right;
+}
+
+.left-big-wrapper {
+  width: 60%;
+  .wrapper-left{
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    color: rgb(175, 105, 105);
+  }
+  p {
+    margin: 10px 5px;
+  }
+  .middle-box{
+    @include middle-box;
+  }
+
+  .middle-down-box{
+    border: solid 5px red;
+    border-radius: 15px;
+    display: inline-block;
+    @include middle-box;
+    margin-bottom: 20px;
+    p {
+      text-align: center;
+      margin: 20px 0 20px 0;
+    }
+    li {
+      list-style: none;
+      margin: 10px 20px;
+    }
+    #truck_kanji, #kanji{
+      width: 100px;
+    }
+    #truck_up_num, #up_num {
+      width: 130px;
+    }
+    #truck_hiragana, #hiragana {
+      width: 90px;
+      border-radius: 8px;
+      margin-right: 20px;
+    }
+    #truck_btm_left_num, #btm_left_num {
+      width: 130px;
+    }
+    #truck_btm_right_num, #btm_right_num {
+      width: 130px;
+    }
+  }
+
+}
+
+.done-caution {
+  background-color: white;
+  text-align: left;
+  font-weight: bold;
+  margin-left: 80px;
+  padding: 10px 10px;
+  h3{
+    text-align: center;
+  }
+  p {
+    margin-top: 20px;
+    margin-left: 20px;
+    span {
+      @include required;
+      float: left;
+      margin-right: 20px;
+    }
+  }
+}
